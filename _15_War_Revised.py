@@ -1,12 +1,19 @@
+# Card battle for 2 players.
+# Players draw each card random.
+# Strongest is "Ace of clubs", weakest is "2 of spades".
+
+
+
+
 from random import shuffle
+
+
+
 
 class Card:
 
-    # Suits in order of weakness.
-    suits = ["spades", "hearts", "diamonds", "clubs"]
-
-    # Values in order of weakness.
-    values = [None, None, "2", "3", "4", "5", "6", "7", "8", "9", "10", "Jack", "Queen", "King", "Ace"]
+    suits = ["spades", "hearts", "diamonds", "clubs"]  # Suits in order of weakness.
+    values = [None, None, "2", "3", "4", "5", "6", "7", "8", "9", "10", "Jack", "Queen", "King", "Ace"]  # Values in order of weakness.
 
     def __init__(self, v, s):
         """ suits and values are integer """
@@ -31,26 +38,38 @@ class Card:
             return self.suit > c2.suit
         return False  # self.value < c2.value
 
+
+
+
 class Deck:
-    def __init__(self):
+
+    def __init__(self):  # Prepare shuffled 52 cards.
         self.cards = []
         for i in range(2, 15):
             for j in range(4):
                 self.cards.append(Card(i, j))
         shuffle(self.cards)  # Shuffle all cards.
 
-    def draw(self):
+    def draw(self):  # Draw a last card. Do nothing if no card.
         if len(self.cards) == 0:
             return
         return self.cards.pop()  # Select the last card in "self.cards" which was shuffled already, and remove that from "self.cards".
 
-class Player:
+
+
+
+class Player:  # Object "Player()" has name (from external), counter "wins" and card "card".
+
     def __init__(self, name):
         self.name = name
         self.wins = 0
         self.card = None
 
+
+
+
 class Game:
+
     def __init__(self):
         name1 = input("Name of player1: ")
         name2 = input("Name of player2: ")
@@ -93,6 +112,9 @@ class Game:
         if p1.wins < p2.wins:
             return p2.name + "won!"
         return "draw!"
+
+
+
 
 game = Game()
 game.play_game()
